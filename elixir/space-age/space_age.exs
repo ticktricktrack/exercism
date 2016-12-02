@@ -1,7 +1,4 @@
 defmodule SpaceAge do
-  @type planet :: :mercury | :venus | :earth | :mars | :jupiter
-                | :saturn | :uranus | :neptune
-
   @earth_year 31557600
 
   @planets %{
