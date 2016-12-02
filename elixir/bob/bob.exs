@@ -1,10 +1,22 @@
 defmodule Bob do
   def hey(remark) do
     cond do
-      !Regex.match?(~r/\w/, remark)    -> "Fine. Be that way!"
-      String.ends_with?(remark, "?")   -> "Sure."
-      remark == String.upcase(remark)  && Regex.match?(~r/[A-ZД]/, remark) -> "Whoa, chill out!"
-      true -> "Whatever."
+      silent?(remark)   -> "Fine. Be that way!"
+      question?(remark) -> "Sure."
+      shouting?(remark) -> "Whoa, chill out!"
+      true              -> "Whatever."
     end
+  end
+
+  def silent?(remark) do
+    !Regex.match?(~r/\w/, remark)
+  end
+
+  def question?(remark) do
+    String.ends_with?(remark, "?")
+  end
+
+  def shouting?(remark) do
+    remark == String.upcase(remark)  && Regex.match?(~r/[A-ZД]/, remark)
   end
 end
