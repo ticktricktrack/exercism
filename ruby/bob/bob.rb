@@ -1,10 +1,12 @@
 class Bob
-  def self.hey(text)
-    type = analyze(text)
-    response_for[type]
+  attr_reader :remark
+
+  def hey(remark)
+    @remark = remark
+    response_for[analyze]
   end
 
-  def self.response_for
+  def response_for
     {
       statement: "Whatever.",
       question:  "Sure.",
@@ -13,31 +15,31 @@ class Bob
     }
   end
 
-  def self.analyze(text)
-    return :blank     if blank?(text)
-    return :command   if all_upper_case?(text) && letters?(text)
-    return :question  if questionmark?(text)
-    return :statement if no_letters?(text)
+  def analyze
+    return :blank     if blank?
+    return :command   if all_upper_case? && letters?
+    return :question  if questionmark?
+    return :statement if no_letters?
     :statement
   end
 
-  def self.blank?(text)
-    text.strip.empty?
+  def blank?
+    remark.strip.empty?
   end
 
-  def self.letters?(text)
-    text.scan(/[a-zA-Z]/).any?
+  def letters?
+    remark.scan(/[a-zA-Z]/).any?
   end
 
-  def self.no_letters?(text)
-    !letters?(text)
+  def no_letters?
+    !letters?
   end
 
-  def self.all_upper_case?(text)
-    text.upcase == text
+  def all_upper_case?
+    remark.upcase == remark
   end
 
-  def self.questionmark?(text)
-    text[-1] == "?"
+  def questionmark?
+    remark[-1] == "?"
   end
 end
