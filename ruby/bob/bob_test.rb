@@ -67,7 +67,7 @@ class BobTest < Minitest::Test
     remark = '1, 2, 3'
     assert_equal 'Whatever.', bob.hey(remark), feedback(remark)
   end
-
+#
   def test_question_with_only_numbers
     remark = '4?'
     assert_equal 'Sure.', bob.hey(remark), feedback(remark)

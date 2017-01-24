@@ -2,44 +2,28 @@ class Bob
   attr_reader :remark
 
   def hey(remark)
-    @remark = remark
-    response_for[analyze]
+    @remark = remark.gsub(/\s/, '')
+    return 'Fine. Be that way!' if silent?
+    return 'Whoa, chill out!'   if shouting? & letters?
+    return 'Sure.'              if asking?
+    'Whatever.'
   end
 
-  def response_for
-    {
-      statement: "Whatever.",
-      question:  "Sure.",
-      command:   "Whoa, chill out!",
-      blank:     "Fine. Be that way!"
-    }
+  private
+
+  def silent?
+    remark == ''
   end
 
-  def analyze
-    return :blank     if blank?
-    return :command   if all_upper_case? && letters?
-    return :question  if questionmark?
-    return :statement if no_letters?
-    :statement
-  end
-
-  def blank?
-    remark.strip.empty?
-  end
-
-  def letters?
-    remark.scan(/[a-zA-Z]/).any?
-  end
-
-  def no_letters?
-    !letters?
-  end
-
-  def all_upper_case?
+  def shouting?
     remark.upcase == remark
   end
 
-  def questionmark?
-    remark[-1] == "?"
+  def letters?
+    (remark =~ /[a-zA-Z]/)
+  end
+
+  def asking?
+    remark =~ /\?$/
   end
 end
