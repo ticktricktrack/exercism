@@ -76,3 +76,29 @@ class Coordinates
     }
   end
 end
+
+class Simulator
+  def instructions(string)
+    list = string.split('')
+    list.map { |instruction| decode(instruction) }
+  end
+
+  def place(robot, options)
+    robot.at(options[:x], options[:y])
+    robot.orient(options[:direction])
+  end
+
+  def evaluate(robot, list)
+    instructions(list).map { |instruction| robot.public_send(instruction) }
+  end
+
+  private
+
+  def decode(instruction)
+    {
+      'L' => :turn_left,
+      'R' => :turn_right,
+      'A' => :advance
+    }[instruction]
+  end
+end
