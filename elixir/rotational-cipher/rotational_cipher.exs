@@ -1,9 +1,9 @@
 defmodule RotationalCipher do
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
-    String.to_charlist(text)
-    |> Enum.map(fn(char) -> encode(char, shift) end)
-    |> List.to_string
+       to_charlist(text)
+    |> Enum.map(&encode(&1, shift))
+    |> to_string
   end
 
   def encode(char, shift) when (char >= ?a) or (char >= ?z) do
