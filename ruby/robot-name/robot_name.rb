@@ -30,17 +30,17 @@ class Robot
 end
 
 class Registry
-  @@robots = []
+  @@names = []
 
   def self.includes?(name)
-    @@robots.include?(name)
+    @@names.include?(name)
   end
 
   def self.register(name)
-    @@robots << name
+    @@names << name
   end
 
   def self.unregister(name)
-    @@robots.delete(name)
+    @@names.delete(name)
   end
 end
